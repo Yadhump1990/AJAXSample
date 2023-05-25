@@ -1,0 +1,42 @@
+<!--<!doctype html>-->
+<!--<html>-->
+<!--<head>-->
+<!--<meta charset="utf-8">-->
+<!--<title>managesubject</title>-->
+<!--</head>-->
+{% extends 'ADMININDEX.html' %}
+{% block body %}
+<body>
+<form id="form1" name="form1" method="post">
+  <h1>MANAGE SUBJECT</h1>
+  <table width="200" border="1">
+    <tbody>
+      <tr>
+        <th scope="col">DEPARTMENT NAME</th>
+        <th scope="col">COURSE NAME</th>
+        <th scope="col">SUBJECT NAME</th>
+        <th scope="col">DESCRIPTION</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+      {% for i in val %}
+      <tr>
+        <td>{{i.depId.name}}</td>
+        <td>{{i.cid.name}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.description}}</td>
+        <td><p><a href="{% url 'editSubject' id=i.id %}">EDIT</a></p>
+          <p><a href="{% url 'delSub' id=i.id %}">DELETE</a></p></td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="4"><center>
+          <a href="addSubject">ADD</a>
+        </center></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

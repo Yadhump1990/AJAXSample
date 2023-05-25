@@ -1,0 +1,40 @@
+<!--<!doctype html>-->
+<!--<html>-->
+<!--<head>-->
+<!--<meta charset="utf-8">-->
+<!--<title>adminHome</title>-->
+<!--</head>-->
+{% extends 'ADMININDEX.html' %}
+{% block body %}
+<body>
+<form id="form1" name="form1" method="post" >
+  <h1>ADMIN HOME</h1>
+  <table width="200" border="1">
+    <tbody>
+      <tr>
+        <th scope="col"><a href="manage_dep">MANAGE DEPARTMENT</a></th>
+      </tr>
+      <tr>
+        <th scope="row"><a href="manageCourse">MANAGE COURSE</a></th>
+      </tr>
+      <tr>
+        <th scope="row"><a href="manageSubject">MANAGE SUBJECTS</a></th>
+      </tr>
+      <tr>
+        <th scope="row"><a href="manageStudent">MANAGE STUDENTS</a></th>
+      </tr>
+      <tr>
+        <th scope="row"><a href="searchstud">SEARCH STUDENTS</a></th>
+      </tr>
+      <tr>
+        <th scope="row"><a href="viewAttendance">STUDENT_ATENDENCE</a></th>
+      </tr>
+      <tr>
+        <th scope="row"><a href="/">LOGOUT</a></th>
+      </tr>
+    </tbody>
+  </table>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

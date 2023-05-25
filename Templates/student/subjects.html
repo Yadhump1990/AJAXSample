@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>subjects</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post">
+  <h1>SUBJECTS</h1>
+  <table width="200" border="1">
+    <tbody>
+      <tr>
+        <th scope="col">SUBJECTS</th>
+        <th scope="col">DESCRIPTIONS</th>
+      </tr>
+      {% for i in val %}
+      <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.description}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+</html>

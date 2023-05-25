@@ -1,0 +1,22 @@
+{% extends 'ADMININDEX.html' %}
+{% block body %}
+<body>
+{% load custom_filters %}
+<h1>Total Attendance Percentage</h1>
+<table width="200" border="1">
+  <tbody>
+    <tr>
+      <th scope="col">STUDENT NAME</th>
+      <th scope="col">PERCENTAGE</th>
+    </tr>
+    {% for student in students %}
+      <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ attendance_percentages|get_by_key:student.id }}%</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</body>
+
+{% endblock %}

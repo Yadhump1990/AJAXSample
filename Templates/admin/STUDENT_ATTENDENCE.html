@@ -1,0 +1,160 @@
+{% extends 'ADMININDEX.html' %}
+{% block body %}
+
+<body>
+{% load custom_filters %}
+<form id="form1" name="form1" method="post">
+  {% csrf_token %}
+  <h1>STUDENT_ATTENDENCE</h1>
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+  <table width="200" border="1">
+    <tbody>
+      <tr>
+        <th scope="col"><label for="date">Date:</label></th>
+        <th scope="col"><input type="date" name="date" id="date" value="{{ selected_date }}"></th>
+        <th scope="col"><input type="submit" name="submit" id="submit" value="Submit"></th>
+      </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <table width="200" border="1">
+    <tbody>
+      <tr>
+        <th scope="col">STUDENT NAME</th>
+        <th scope="col">ATTENDANCE</th>
+      </tr>
+      {% for student in students %}
+        <tr>
+          <td>{{ student.name }}</td>
+          <td>
+            {% if selected_date %}
+              {% with attendance=student_attendance_dict|get_by_key:student.id %}
+                {% if attendance %}
+                  {% if attendance.attendence == 1 %}
+                    Present
+                  {% elif attendance.attendence == 0 %}
+                    Absent
+                  {% endif %}
+                {% endif %}
+              {% endwith %}
+            {% else %}
+              <input type="hidden" name="date" value="{{ selected_date }}">
+              <a href="{% url 'markAttendance' id=student.id }">PRESENT</a>
+              <a href="{% url 'absent' id=student.id }">ABSENT</a>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</form>
+
+</body>
+<!--</html>-->
+{% endblock %}
+
+<!--working code but few bugs-->
+<!--<form id="form1" name="form1" method="post">-->
+<!--  {% csrf_token %}-->
+<!--  <h1>STUDENT_ATTENDENCE</h1>-->
+<!--  {% if error %}-->
+<!--    <p class="error">{{ error }}</p>-->
+<!--  {% endif %}-->
+<!--  <table width="200" border="1">-->
+<!--    <tbody>-->
+<!--      <tr>-->
+<!--        <th scope="col"><label for="date">Date:</label></th>-->
+<!--        <th scope="col"><input type="date" name="date" id="date" value="{{ selected_date }}"></th>-->
+<!--        <th scope="col"><input type="submit" name="submit" id="submit" value="Submit"></th>-->
+<!--      </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--  <p>&nbsp;</p>-->
+<!--  <table width="200" border="1">-->
+<!--    <tbody>-->
+<!--      <tr>-->
+<!--        <th scope="col">STUDENT NAME</th>-->
+<!--        <th scope="col">ATTENDANCE</th>-->
+<!--      </tr>-->
+<!--      {% for student in students %}-->
+<!--        <tr>-->
+<!--          <td>{{ student.name }}</td>-->
+<!--          <td>-->
+<!--            {% with attendance=student_attendance_dict|get_by_key:student.id %}-->
+<!--              {% if attendance %}-->
+<!--                {% if attendance.attendence == 1 %}-->
+<!--                  Present-->
+<!--                {% elif attendance.attendence == 0 %}-->
+<!--                  Absent-->
+<!--                {% endif %}-->
+<!--              {% else %}-->
+<!--                <form method="post" action="{% url 'markAttendance' id=student.id %}">-->
+<!--                  {% csrf_token %}-->
+<!--                  <input type="hidden" name="date" value="{{ selected_date }}">-->
+<!--                  <button type="submit" name="attendance" value="1">PRESENT</button>-->
+<!--                  <button type="submit" name="attendance" value="0">ABSENT</button>-->
+<!--                </form>-->
+<!--              {% endif %}-->
+<!--            {% endwith %}-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--      {% endfor %}-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</form>-->
+
+
+
+<!--<form id="form1" name="form1" method="post">-->
+<!--  {% csrf_token %}-->
+<!--  <h1>STUDENT_ATTENDENCE</h1>-->
+<!--  {% if error %}-->
+<!--    <p class="error">{{ error }}</p>-->
+<!--  {% endif %}-->
+<!--  <table width="200" border="1">-->
+<!--    <tbody>-->
+<!--      <tr>-->
+<!--        <th scope="col"><label for="date">Date:</label></th>-->
+<!--        <th scope="col"><input type="date" name="date" id="date" value="{{ selected_date }}"></th>-->
+<!--        <th scope="col"><input type="submit" name="submit" id="submit" value="Submit"></th>-->
+<!--      </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--  <p>&nbsp;</p>-->
+<!--  <table width="200" border="1">-->
+<!--    <tbody>-->
+<!--      <tr>-->
+<!--        <th scope="col">STUDENT NAME</th>-->
+<!--        <th scope="col">ATTENDANCE</th>-->
+<!--      </tr>-->
+<!--      {% for student in students %}-->
+<!--        <tr>-->
+<!--          <td>{{ student.name }}</td>-->
+<!--          <td>-->
+<!--            {% if selected_date %}-->
+<!--              {% with attendance=student_attendance_dict|get_by_key:student.id %}-->
+<!--                {% if attendance %}-->
+<!--                  {% if attendance.attendence == 1 %}-->
+<!--                    Present-->
+<!--                  {% elif attendance.attendence == 0 %}-->
+<!--                    Absent-->
+<!--                  {% endif %}-->
+<!--                {% endif %}-->
+<!--              {% endwith %}-->
+<!--            {% else %}-->
+<!--              <form method="post" action="{% url 'markAttendance' id=student.id %}">-->
+<!--                {% csrf_token %}-->
+<!--                <input type="hidden" name="date" value="{{ selected_date }}">-->
+<!--                <button type="submit" name="attendance" value="1">PRESENT</button>-->
+<!--                <button type="submit" name="attendance" value="0">ABSENT</button>-->
+<!--              </form>-->
+<!--            {% endif %}-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--      {% endfor %}-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</form>-->

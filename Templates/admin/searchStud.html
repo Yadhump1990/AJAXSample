@@ -1,0 +1,49 @@
+<!--<!doctype html>-->
+<!--<html>-->
+<!--<head>-->
+<!--<meta charset="utf-8">-->
+<!--<title>shearchStudent</title>-->
+<!--</head>-->
+{% extends 'ADMININDEX.html' %}
+{% block body %}
+<body>
+<form id="form1" name="form1" method="post" action="serch_student">
+  <h1>SEARCH STUDENT BY COURSE</h1>
+  <table width="200" border="1">
+    <tbody>
+      <tr>
+        <th scope="col">COURSE</th>
+        <th scope="col"><label for="select"></label>
+          <select name="select" id="select">
+            {% for i in val %}
+            {% if i.id|stringformat:"s" == s|stringformat:"s" %}
+              <option value="{{i.id}}" selected>{{i.name}}</option>
+            {% else %}
+              <option value="{{i.id}}">{{i.name}}</option>
+            {% endif %}
+            {% endfor %}
+        </select></th>
+        <th scope="col"><input type="submit" name="submit" id="submit" value="SEARCH"></th>
+      </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <table width="200" border="1">
+    <tbody>
+      <tr>
+        <th scope="col">STUDENT NAME</th>
+        <th scope="col">AGE</th>
+      </tr>
+      {% for i in val2 %}
+      <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.age}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

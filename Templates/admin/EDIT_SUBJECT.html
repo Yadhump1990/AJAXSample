@@ -1,0 +1,57 @@
+<!--<!doctype html>-->
+<!--<html>-->
+<!--<head>-->
+<!--<meta charset="utf-8">-->
+<!--<title>EDIT_SUBJECT</title>-->
+<!--</head>-->
+{% extends 'ADMININDEX.html' %}
+{% block body %}
+<body>
+<form id="form1" name="form1" method="post" action="{% url 'updateSubject' %}">
+  <h1>EDIT SUBJECT</h1>
+  <table width="200" border="1">
+    <tbody>
+    <tr>
+        <th scope="row">DEPARTMENT</th>
+        <td><label for="select"></label>
+          <select name="select" id="select">
+
+<!--            <option  value="{{val.depId}}" disabled selected>{{val.depId.name}}</option>-->
+<!--            <option disabled>choose department from below</option>-->
+            {% for i in val2 %}
+            <option value="{{i.id}}" {% if i.id == val.depId.id %}selected{% endif %}>{{i.name}}</option>
+            {% endfor %}
+        </select></td>
+      </tr>
+      <tr>
+        <th scope="row">COURSE</th>
+        <td><label for="select2"></label>
+          <select name="select2" id="select2">
+
+<!--            <option  value="{{val.cid}}" disabled selected>{{val.cid.name}}</option>-->
+<!--            <option disabled>choose department from below</option>-->
+            {% for i in val3 %}
+            <option value="{{i.id}}" {% if i.id == val.cid.id %}selected{% endif %}>{{i.name}}</option>
+            {% endfor %}
+        </select></td>
+      </tr>
+      <tr>
+        <th scope="row">SUBJECT NAME</th>
+        <td><label for="textfield"></label>
+          <input type="text" name="textfield" id="textfield" value="{{val.name}}"></td>
+      </tr>
+      <tr>
+        <th scope="row">DESCRIPTION</th>
+        <td><label for="textarea"></label>
+          <textarea name="textarea" id="textarea">{{val.description}}</textarea></td>
+      </tr>
+      <tr>
+        <th colspan="2" scope="row"><input type="submit" name="submit" id="submit" value="UPDATE"></th>
+      </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

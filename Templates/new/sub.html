@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="sub">
+  <table width="10%" border="1" cellpadding="1">
+    <tr>
+      <th scope="row">department</th>
+      <td><label>
+        <select name="select" id="dep">
+           {% for i in val %}
+          <option value="{{i.id}}">{{i.dep}}</option>
+          {% endfor %}
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <th scope="row">course</th>
+      <td><select name="select2" id="crs">
+      </select></td>
+    </tr>
+    <tr>
+      <th scope="row">sem</th>
+      <td><label>
+        <select name="select3">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <th scope="row">subject</th>
+      <td><input type="text" name="textfield" /></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><label>
+        <input type="submit" name="Submit" value="Submit" />
+      </label></th>
+    </tr>
+  </table>
+</form>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    $("#dep").change(function(){
+    var sd;
+     sd = $(this).val();
+$.ajax(
+    {
+        type:"GET",
+        url: "/searchcrs",
+        data:{
+                 dep: sd,
+        },
+        success: function( data )
+        {
+        var tab;
+        tab='<option>Select</option>';
+        for (var i=0, l=data.res.length; i<l; i++)
+        {
+        tab=tab+'<option value="'+data.res[i].id+'">'+data.res[i].course+'</option>'
+        }
+
+$('#crs').empty();
+$('#crs').append(tab);
+        }
+     })
+
+});
+
+</script>
+</html>

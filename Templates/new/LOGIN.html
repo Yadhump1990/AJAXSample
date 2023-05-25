@@ -1,0 +1,71 @@
+{% extends 'index1.html' %}
+{% block body %}
+
+<body>
+<form id="form1" name="form1" method="post" action="log">
+  {% csrf_token %}
+  <table width="500" border="0" >
+     <br>
+  <br>
+  <center><h2>LOGIN HERE</h2></center>
+  <center>  <h2>- - - - - - - - - - - - - - - - - - - - - -</h2></center>
+    <tr>
+      <th scope="row"><h4>USERNAME</h4></th>
+      <td><label>
+        <input type="text" name="textfield2" id="un" required /><p id="message"></p>
+      </label></td>
+    </tr>
+    <tr>
+      <th scope="row"><h4>PASSWORD</h4></th>
+      <td><label>
+        <input name="textfield" type="password" required />
+      </label></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><label>
+        <input type="submit" name="Submit" value="LOGIN" />
+        <!--<a href="shopreg">SIGNUP</a></label>-->
+        <br />
+        <a href="forgetpass">Forget Password?</a></label></th>
+    </tr>
+  </table>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+    $("#un").keyup(function(){
+    var uname;
+    uname = $(this).val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/likepost",
+        data:{
+                 username: uname,
+
+        },
+        success: function( data )
+        {
+        if (data.is_taken) {
+
+                    $( '#message' ).text(data.error_message);
+                  }
+                  else
+                  {
+                  $( '#message' ).text("");
+                  }
+
+        }
+     })
+});
+
+
+</script>
+
+
+</body>
+{% endblock %}

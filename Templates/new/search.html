@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="button">
+  <table width="40%" border="1" cellpadding="1">
+    <tr>
+      <th width="55%" scope="row">course</th>
+      <td width="45%">
+        <select name="select2" id="crs" required>
+          <option value="">select</option>
+            {% for i in val %}
+          <option value="{{i.id}}">{{i.course}}</option>
+          {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <th scope="row">sem</th>
+      <td><label>
+        <select name="select3" id="sem" required>
+          <option value="">select</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+        </select>
+        <input type="submit" name="Submit" value="search" />
+      </label></td>
+    </tr>
+    <tr>
+      <th scope="row">subject</th>
+      <td><label>
+        <select name="select" id="sub">
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row">subjects</th>
+    </tr>
+    {% for i in v %}
+    <tr>
+      <th colspan="2" scope="row"><label>{{i.sub}}</label></th>
+    </tr>
+    <tr>
+    </tr>
+    {% endfor %}
+  </table>
+   <div id="uv"></div>
+</form>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    $("#crs").change(function(){
+    var sd;
+     sd = $(this).val();
+sem=document.getElementById("sem").value;
+$.ajax(
+    {
+        type:"GET",
+        url: "/searchsub",
+        data:{
+                 crs: sd,
+                 sem:sem
+        },
+        success: function( data )
+        {
+       var tab;
+       var tab1;
+               tab1='<option>Select</option>';
+
+        tab='<table border="1" width="40%">     <tr>        <th width="55%">id</th>       <th>subject</th> </tr> '
+
+        for (var i=0, l=data.res.length; i<l; i++)
+    {
+    tab=tab+'<tr> <td width="45%">'+data.res[i].id+'</td><td>'+data.res[i].sub+'</td></tr>'
+        tab1=tab1+'<option value="'+data.res[i].id+'">'+data.res[i].sub+'</option>'
+    }
+    tab=tab+'</table>'
+$('#sub').empty();
+$('#sub').append(tab1);
+             document.getElementById('uv').innerHTML=tab;
+        }
+     })
+});
+</script>
+</html>
